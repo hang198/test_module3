@@ -1,0 +1,45 @@
+<div class="style">
+  <h3>Book Add</h3>
+</div>
+<div class="container">
+  <form [formGroup]="addBookForm" (ngSubmit)="submit()" class="center">
+    <div class="form-group">
+      <label>Title</label>
+      <input type="text" class="form-control col-md-6" formControlName="title">
+    </div>
+    <div *ngIf="title.invalid && (title.dirty || title.touched)"
+         class="alert alert-danger col-md-6">
+
+      <div *ngIf="title.errors.required">
+        Title is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Author</label>
+      <input type="text" class="form-control col-md-6" formControlName="author">
+    </div>
+    <div *ngIf="author.invalid && (author.dirty || author.touched)"
+         class="alert alert-danger col-md-6">
+
+      <div *ngIf="author.errors.required">
+        Author is required.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" class="form-control col-md-6" formControlName="description">
+    </div>
+    <div *ngIf="description.invalid && (description.dirty || description.touched)"
+         class="alert alert-danger col-md-6">
+
+      <div *ngIf="description.errors.required">
+        Description is required.
+      </div>
+
+    </div>
+    <div class="col-md-12 row mt-2">
+      <button type="submit" [disabled]="!addBookForm.valid" class="btn btn-primary btn-sm">Create</button>
+      <a class="btn btn-danger btn-sm ml-2" routerLink='/'>Cancel</a>
+    </div>
+  </form>
+</div>

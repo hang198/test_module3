@@ -1,0 +1,44 @@
+<div class="style">
+  <h3>List of books</h3>
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-11">Have {{totalBook()}} books</div>
+    <div class="col-1">
+      <a routerLink="/create" class="btn btn-primary"><i class="fa fa-plus"></i></a>
+    </div>
+  </div>
+  <flash-messages></flash-messages>
+  <table class="table" border="1">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">STT</th>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Description</th>
+      <th scope="col" colspan="2">Handle</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let book of books |  paginate: { itemsPerPage: 3, currentPage: p };let i = index">
+      <th scope="row">{{i + 1}}</th>
+      <td><a [routerLink]="['/detail',book.id]">{{book.title}}</a></td>
+      <td>{{book.author}}</td>
+      <td>{{book.description}}</td>
+      <td>
+        <a class="btn btn-primary" [routerLink]="['/edit',book.id]"><i class="fa fa-edit"></i></a>
+        <button class="btn btn-danger"
+                mwlConfirmationPopover
+                [popoverTitle]="popoverTitle"
+                [popoverMessage]="popoverMessage"
+                placement="top"
+                (confirm)="delete(book.id)"
+                (cancel)="cancelClicked = true">
+          <i class="fa fa-trash"></i>
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>
